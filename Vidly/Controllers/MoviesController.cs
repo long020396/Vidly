@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Vidly.Models;
 using System.Data.Entity;
 using Vidly.ViewModels;
+using System.Data.Entity.Validation;
 
 namespace Vidly.Controllers
 {
@@ -71,6 +72,7 @@ namespace Vidly.Controllers
             return View("MovieForm", viewModel);
         }
 
+        [HttpPost]
         public ActionResult Save(Movie movie)
         {
             if (movie.Id == 0)
@@ -87,7 +89,14 @@ namespace Vidly.Controllers
                 movieInDb.NumberInStock = movie.NumberInStock;
             }
 
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                Console.WriteLine(e);
+            }
 
             return RedirectToAction("Index", "Movies");
         }
