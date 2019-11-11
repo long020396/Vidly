@@ -15,7 +15,7 @@ namespace Vidly.DTOs
         [StringLength(225)]
         public string Name { get; set; }
 
-        [Min18YearsIfAMember]
+        //[Min18YearsIfAMember]
         public DateTime? Birthdate { get; set; }
 
         public bool IsSubscribedToNewsletter { get; set; }
