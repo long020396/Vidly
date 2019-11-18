@@ -8,6 +8,7 @@ using System.Web.Http;
 using Vidly.DTOs;
 using Vidly.Models;
 using System.Data.Entity;
+using Vidly.Modles;
 
 namespace Vidly.Controllers.API
 {
@@ -46,6 +47,7 @@ namespace Vidly.Controllers.API
 
         // POST api/movies
         [HttpPost]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public IHttpActionResult NewMovie(MovieDTO movieDTO)
         {
             if (!ModelState.IsValid)
